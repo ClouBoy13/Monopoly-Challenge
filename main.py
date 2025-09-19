@@ -105,6 +105,15 @@ def game_loop(players):
         current_player["position"] = (current_player["position"] + move_steps) % board_size
         current_property = board[current_player["position"]]
 
+        # Call the draw_card function and print the result
+        if current_property["type"] == "community":
+            drawn_card = draw_card("cards.json", "community")
+            print(drawn_card)
+
+        if current_property["type"] == "chance":
+            drawn_card = draw_card("cards.json", "chance")
+            print(drawn_card)
+
         print(f"{current_player['name']} landed on {current_property['name']} (Position: {current_player['position']})")
     
         if "last_position" in current_player: 
