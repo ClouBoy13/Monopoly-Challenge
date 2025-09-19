@@ -30,7 +30,11 @@ def main():
     players.append({"name": name, "peice": peice})
     save_player_data(players)
 
-    
+    num_players = int(input("Enter number of players (2-8): "))
+    while not num_players.isdigit() or not (2 <= int(num_players) <= 8):
+        num_players = input("Invalid input. Please enter a number between 2 and 8: ")
+
+        
 
     print(f"Welcome {name}! You have chosen the piece number {peice}.")
     input("Press Enter to roll the dice...")
