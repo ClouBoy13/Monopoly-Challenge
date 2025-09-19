@@ -1,11 +1,11 @@
 from random import randint
 import json
+import os
 
 def game_state(data, filename="game_state.json"):
-    """Saves a game statues as a Json file"""
+    """Saves the entire game state as a JSON file"""
     with open(filename, "w") as game_state_file:
         json.dump(data, game_state_file, indent=4)
-
 
 PIECES = {
     "1": "Race Car",
@@ -19,11 +19,9 @@ PIECES = {
 }
 
 def roll_dice():
-    """rolls two six-sided dice and returns their values as a list"""
+    """Rolls two six-sided dice and returns their values as a list"""
     return [randint(1, 6) for _ in range(2)]
 
-def player_info():
-    """prompts the user for their name and returns it"""
 def get_num_players():
     while True:
         try:
@@ -48,28 +46,25 @@ def choose_piece(available_pieces):
 
 def player_info(used_pieces):
     name = input("Enter your name: ")
-    piece = input("Choose your piece, 1 for Race Car, 2 for Top Hat, 3 for Scottie Dog, 4 for Cat, 5 for Penguin, 6 for Rubber duck, 7 for T-Rex and 8 for Battleship: ")
-
-    return name, piece
     available_pieces = [k for k in PIECES if k not in used_pieces]
     piece = choose_piece(available_pieces)
     bank = 1500
-    propertys = []
-    return name, piece, bank, propertys
+    properties = []
+    return name, piece, bank, properties
 
-def save_player_data(player_info, filename="players.json"):
-    """Saves a player's data statues as a Json file"""
+def save_player_data(players, filename="players.json"):
+    """Saves player data as a JSON file"""
     with open(filename, "w") as f:
-        json.dump(player_info, f, indent=4)
+        json.dump(players, f, indent=4)
 
 def load_player_data(filename="players.json"):
-    """Loads a player's data statues from a Json file"""
+    """Loads player data from a JSON file"""
     try:
-            with open(filename, "r") as f:
-                return json.load(f)
+        with open(filename, "r") as f:
+            return json.load(f)
     except FileNotFoundError:
-            return []
-        
+        return []
+
 def game_loop(players):
     turn = 0
     while True:
@@ -77,9 +72,8 @@ def game_loop(players):
         input(f"\n{current_player['name']}'s turn. Press Enter to roll the dice...")
         dice = roll_dice()
         print(f"{current_player['name']} rolled {dice[0]} and {dice[1]} (Total: {sum(dice)})")
-        # Here you would add logic for moving the player, buying properties, etc.
-        turn += 1
-    # Move player along the board
+
+        # Load the board
         try:
             with open("property.json", "r") as f:
                 board = json.load(f)
@@ -87,6 +81,7 @@ def game_loop(players):
             print("property.json not found. Exiting game loop.")
             return
 
+        # Track player position
         if "position" not in current_player:
             current_player["position"] = 0
 
@@ -97,33 +92,44 @@ def game_loop(players):
 
         print(f"{current_player['name']} landed on {current_property['name']} (Position: {current_player['position']})")
 
-        # Placeholder for property buying/handling logic
+        # TODO: Add property buying/handling logic here
 
-        # End turn or break loop as needed
-    
+        # Save progress every turn
+        save_player_data(players)
 
-def main():
-    name, piece = player_info()
-    players = load_player_data()
-    players.append({"name": name, "piece": piece})
+        turn += 1
+
+def new_game():
     num_players = get_num_players()
     players = []
     used_pieces = set()
     for i in range(num_players):
         print(f"\nPlayer {i+1}:")
-        name, piece, bank, propertys = player_info(used_pieces)
-        players.append({"name": name, "piece": PIECES[piece], "bank": bank, "propertys": []})
+        name, piece, bank, properties = player_info(used_pieces)
+        players.append({
+            "name": name,
+            "piece": PIECES[piece],
+            "bank": bank,
+            "properties": []
+        })
         used_pieces.add(piece)
     save_player_data(players)
-    print("\nPlayer data saved to players.json.")
+    print("\nNew game started and saved to players.json.")
+    return players
+
+def main():
+    print("Welcome to Monopoly!")
+    if os.path.exists("players.json"):
+        choice = input("Load saved game? (y/n): ").strip().lower()
+        if choice == "y":
+            players = load_player_data()
+            print("Game loaded.")
+        else:
+            players = new_game()
+    else:
+        players = new_game()
+
     game_loop(players)
-
-
 
 if __name__ == "__main__":
     main()
-
-    print(f"Welcome {name}! You have chosen the piece number {piece}.")
-    input("Press Enter to roll the dice...")
-    dice = roll_dice()
-    print(f"You rolled a {dice[0]} and a {dice[1]}, for a total of {sum(dice)}.")
