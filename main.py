@@ -8,9 +8,9 @@ def roll_dice():
 def player_info():
     # prompts the user for their name and returns it
     name = input("Enter your name: ")
-    peice = input("Choose your piece, 1 for Race Car, 2 for Top Hat, 3 for Scottie Dog, 4 for Cat, 5 for Penguin, 6 for Rubber duck, 7 for T-Rex and 8 for Battleship: ")
+    piece = input("Choose your piece, 1 for Race Car, 2 for Top Hat, 3 for Scottie Dog, 4 for Cat, 5 for Penguin, 6 for Rubber duck, 7 for T-Rex and 8 for Battleship: ")
 
-    return name, peice
+    return name, piece
 
 def save_player_data(player_info, filename="players.json"):
         with open(filename, "w") as f:
@@ -25,14 +25,14 @@ def load_player_data(filename="players.json"):
         
 
 def main():
-    name, peice = player_info()
+    name, piece = player_info()
     players = load_player_data()
-    players.append({"name": name, "peice": peice})
+    players.append({"name": name, "piece": piece})
     save_player_data(players)
 
     
 
-    print(f"Welcome {name}! You have chosen the piece number {peice}.")
+    print(f"Welcome {name}! You have chosen the piece number {piece}.")
     input("Press Enter to roll the dice...")
     dice = roll_dice()
     print(f"You rolled a {dice[0]} and a {dice[1]}, for a total of {sum(dice)}.")
