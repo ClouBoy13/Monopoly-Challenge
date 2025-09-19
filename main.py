@@ -67,10 +67,18 @@ def load_player_data(filename="players.json"):
 
 def game_loop(players):
     turn = 0
+    
     while True:
         current_player = players[turn % len(players)]
-        input(f"\n{current_player['name']}'s turn. Press Enter to roll the dice...")
-        dice = roll_dice()
+        player_enter = input(f"\n{current_player['name']}'s turn. Press X to roll the dice or Q to access the menu: ")
+         
+        if player_enter != "X" and player_enter != "x" and player_enter != "q":
+            print("Please enter a vaild input.")
+            player_enter = input(f"\n{current_player['name']}'s turn. Press X to roll the dice : ")
+            continue
+        elif player_enter == "X" or player_enter == "x":
+            dice = roll_dice()
+
         print(f"{current_player['name']} rolled {dice[0]} and {dice[1]} (Total: {sum(dice)})")
 
         # Load the board
@@ -92,7 +100,32 @@ def game_loop(players):
 
         print(f"{current_player['name']} landed on {current_property['name']} (Position: {current_player['position']})")
 
-        # TODO: Add property buying/handling logic here
+        if player_enter == "q":
+
+            while True:
+                print("\nMenu:")
+                print("1. View property details")
+                print("2. Exit game")
+                print("3. Continue turn")
+                menu_choice = input("Choose an option (1-3): ").strip()
+                if menu_choice == "1":
+                    print(json.dumps(current_property, indent=4))
+                elif menu_choice == "2":
+                    print("Exiting game. Progress saved.")
+                    save_player_data(players)
+                    False
+                    exit()
+                elif menu_choice == "3":
+                    break
+                else:
+                    print("Invalid choice. Please select again.")
+
+        # Check if player passed GO (position 0) after the first turn
+        if "last_position" in current_player:
+            if current_player["position"] < current_player["last_position"]:
+                current_player["bank"] += 200
+                print(f"{current_player['name']} passed GO! +$200 (Bank: ${current_player['bank']})")
+        current_player["last_position"] = current_player["position"]
 
         # Save progress every turn
         save_player_data(players)

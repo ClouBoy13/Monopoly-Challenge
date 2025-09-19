@@ -1,16 +1,18 @@
 [
     {
         "name": "ollie",
-        "piece": "T-Rex",
-        "bank": 1500,
+        "piece": "Race Car",
+        "bank": 1700,
         "properties": [],
-        "position": 16
+        "position": 8,
+        "last_position": 8
     },
     {
-        "name": "jish",
-        "piece": "Battleship",
-        "bank": 1500,
+        "name": "josh ",
+        "piece": "Top Hat",
+        "bank": 1700,
         "properties": [],
-        "position": 20
+        "position": 12,
+        "last_position": 12
     }
 ]
