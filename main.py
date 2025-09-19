@@ -20,8 +20,8 @@ def player_info():
 
 def save_player_data(player_info, filename="players.json"):
     """Saves a player's data statues as a Json file"""
-        with open(filename, "w") as f:
-            json.dump(player_info, f, indent=4)
+    with open(filename, "w") as f:
+        json.dump(player_info, f, indent=4)
 
 def load_player_data(filename="players.json"):
     """Loads a player's data statues from a Json file"""
