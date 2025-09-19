@@ -2,17 +2,17 @@
     {
         "name": "ollie",
         "piece": "Race Car",
-        "bank": 1900,
+        "bank": 2100,
         "properties": [],
-        "position": 33,
-        "last_position": 33
+        "position": 4,
+        "last_position": 4
     },
     {
         "name": "josh ",
         "piece": "Top Hat",
         "bank": 2100,
         "properties": [],
-        "position": 24,
-        "last_position": 24
+        "position": 38,
+        "last_position": 38
     }
 ]
