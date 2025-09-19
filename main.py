@@ -114,11 +114,11 @@ def game_loop(players):
         current_property = board[current_player["position"]]
 
         # Call the draw_card function and print the result
-        if current_property["type"] == "community":
+        if current_property["name"] == "Community Chest":
             drawn_card = draw_card("cards.json", "community")
             print(drawn_card)
 
-        if current_property["type"] == "chance":
+        if current_property["name"] == "Chance":
             drawn_card = draw_card("cards.json", "chance")
             print(drawn_card)
 
