@@ -1,6 +1,12 @@
 from random import randint
 import json
 
+def game_state(data, filename="game_state.json"):
+    """Saves a game statues as a Json file"""
+    with open(filename, "w") as game_state_file:
+        json.dump(data, game_state_file, indent=4)
+
+
 def roll_dice():
     # rols two six-sided dice and returns their values as a list
     return [randint(1, 6) for _ in range(2)]
