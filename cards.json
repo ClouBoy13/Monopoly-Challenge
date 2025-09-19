@@ -1,0 +1,33 @@
+{
+"chanceList":[
+{"item":"Advance to Go (Collect $200)", "actions": {"moveTo":"Go", "credit": {"amount":200,"from":"bank"}}},
+{"item":"Advance to Leicester Square", "actions": {"moveTo":"Leicester Square"}},
+{"item":"Go back 3 spaces", "actions": {"move":-3}},
+{"item":"Pay poor tax of $15","actions": {"debit":{"amount":15,"to":"bank"}}},
+{"item":"Your building loan matures collect $150", "actions": {"credit":{"amount":150,"from":"bank"}}},
+{"item":"You have won a crossword competition - collect $100 ", "actions": {"credit":{"amount":100,"from":"bank"}}}
+],
+"communityChestList":[
+{"item":"Advance to Go (Collect $200)", "actions": {"moveTo":"Go", "credit": {"amount":200,"from":"bank"}}},
+{"item":"Bank error in your favor collect $75", "actions": {"credit":{"amount":75,"from":"bank"}}},
+{"item":"Doctor's fees Pay $50","actions": {"debit":{"amount":50,"to":"bank"}}},
+{"item":"It is your birthday Collect $10 from each player"},
+{"item":"Grand Opera Night collect $50 from every player for opening night seats"},
+{"item":"Income Tax refund collect $20", "actions": {"credit":{"amount":20,"from":"bank"}}},
+{"item":"Life Insurance Matures collect $100", "actions": {"credit":{"amount":100,"from":"bank"}}},
+{"item":"Pay Hospital Fees of $100","actions": {"debit":{"amount":100,"to":"bank"}}},
+{"item":"Pay School Fees of $50","actions": {"debit":{"amount":50,"to":"bank"}}},
+{"item":"You inherit $100", "actions": {"credit":{"amount":100,"from":"bank"}}},
+{"item":"From sale of stock you get $50", "actions": {"credit":{"amount":50,"from":"bank"}}}
+]
+}
+
+
+
+
+
+
+
+
+
+
