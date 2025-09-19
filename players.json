@@ -1,10 +1,14 @@
 [
     {
         "name": "ollie",
-        "piece": "T-Rex"
+        "piece": "Battleship",
+        "bank": 1500,
+        "propertys": []
     },
     {
-        "name": "josh",
-        "piece": "Battleship"
+        "name": "ashjdk",
+        "piece": "T-Rex",
+        "bank": 1500,
+        "propertys": []
     }
 ]
