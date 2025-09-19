@@ -152,7 +152,7 @@ def game_loop(players):
     # Save progress every turn
         save_player_data(players)
 
-    turn += 1
+        turn += 1
 
 def new_game():
     num_players = get_num_players()
