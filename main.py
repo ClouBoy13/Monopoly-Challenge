@@ -99,6 +99,14 @@ def game_loop(players):
         current_property = board[current_player["position"]]
 
         print(f"{current_player['name']} landed on {current_property['name']} (Position: {current_player['position']})")
+    
+        if "last_position" in current_player: 
+            if current_player["position"] < current_player["last_position"]:
+                current_player["bank"] += 200
+                print(f"{current_player['name']} passed Go and collected $200!")
+        current_player["last_position"] = current_player["position"]
+        
+    # TODO: Add property buying/handling logic here
 
         if player_enter == "q":
 
@@ -126,11 +134,10 @@ def game_loop(players):
                 current_player["bank"] += 200
                 print(f"{current_player['name']} passed GO! +$200 (Bank: ${current_player['bank']})")
         current_player["last_position"] = current_player["position"]
-
-        # Save progress every turn
+    # Save progress every turn
         save_player_data(players)
 
-        turn += 1
+    turn += 1
 
 def new_game():
     num_players = get_num_players()
