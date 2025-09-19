@@ -1,4 +1,5 @@
 from random import randint
+import json
 
 def roll_dice():
     # rols two six-sided dice and returns their values as a list
@@ -8,6 +9,30 @@ def player_info():
     # prompts the user for their name and returns it
     name = input("Enter your name: ")
     peice = input("Choose your piece, 1 for Race Car, 2 for Top Hat, 3 for Scottie Dog, 4 for Cat, 5 for Penguin, 6 for Rubber duck, 7 for T-Rex and 8 for Battleship: ")
-    
-    return name
 
+    return name, peice
+
+def save_player_data(player_info, filename="players.json"):
+        with open(filename, "w") as f:
+            json.dump(player_info, f, indent=4)
+
+def load_player_data(filename="players.json"):
+        try:
+            with open(filename, "r") as f:
+                return json.load(f)
+        except FileNotFoundError:
+            return []
+        
+
+def main():
+    name, peice = player_info()
+    players = load_player_data()
+    players.append({"name": name, "peice": peice})
+    save_player_data(players)
+
+    
+
+    print(f"Welcome {name}! You have chosen the piece number {peice}.")
+    input("Press Enter to roll the dice...")
+    dice = roll_dice()
+    print(f"You rolled a {dice[0]} and a {dice[1]}, for a total of {sum(dice)}.")
