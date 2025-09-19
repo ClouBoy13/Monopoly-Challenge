@@ -7,6 +7,21 @@ def game_state(data, filename="game_state.json"):
     with open(filename, "w") as game_state_file:
         json.dump(data, game_state_file, indent=4)
 
+
+def draw_card(filename, card_type):
+    """Draws card from cards.json depending on card type"""
+    with open("cards.json", "r") as card_draw_file:
+        data = json.load(card_draw_file)
+
+    # if chance card pick a random card from list
+    if card_type == "chance":
+        return f"Chance Card: {json.dumps(data["chanceList"][randint(0, len(data["chanceList"]))]["item"], indent=4)}"
+
+    # if Community Card pick a random card from list
+    if card_type == "community":
+        return f"Community Card: {json.dumps(data["communityChestList"][randint(0, len(data["chanceList"]))]["item"], indent=4)}"
+
+
 PIECES = {
     "1": "Race Car",
     "2": "Top Hat",
